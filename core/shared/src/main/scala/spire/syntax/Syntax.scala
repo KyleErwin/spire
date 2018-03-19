@@ -24,13 +24,21 @@ trait OrderSyntax extends PartialOrderSyntax {
   implicit def literalDoubleOrderOps(lhs: Double): LiteralDoubleOrderOps = new LiteralDoubleOrderOps(lhs)
 }
 
-trait IsRealSyntax extends OrderSyntax with SignedSyntax {
+trait IsRealSyntax extends SignedSyntax {
   implicit def isRealOps[A:IsReal](a:A): IsRealOps[A] = new IsRealOps(a)
 }
 
-trait SignedSyntax {
+trait SignedSyntax extends OrderSyntax {
   implicit def signedOps[A: Signed](a: A): SignedOps[A] = new SignedOps(a)
 }
+
+
+trait TruncatedDivisionSyntax extends SignedSyntax {
+  implicit def truncatedDivisionOps[A:TruncatedDivision](a: A): TruncatedDivisionOps[A] = new TruncatedDivisionOps(a)
+  implicit def literalIntTruncatedDivisionOps(lhs:Int): LiteralIntTruncatedDivisionOps = new LiteralIntTruncatedDivisionOps(lhs)
+  implicit def literalLongTruncatedDivisionOps(lhs:Long): LiteralLongTruncatedDivisionOps = new LiteralLongTruncatedDivisionOps(lhs)
+  implicit def literalDoubleTruncatedDivisionOps(lhs:Double): LiteralDoubleTruncatedDivisionOps = new LiteralDoubleTruncatedDivisionOps(lhs)
+} 
 
 trait SemigroupoidSyntax {
   implicit def semigroupoidOps[A:Semigroupoid](a:A): SemigroupoidOps[A] = new SemigroupoidOps[A](a)
@@ -246,8 +254,9 @@ trait AllSyntax extends
     CforSyntax with
     EqSyntax with
     PartialOrderSyntax with
-    OrderSyntax with
     SignedSyntax with
+    OrderSyntax with
+    TruncatedDivisionSyntax with
     IsRealSyntax with
     ConvertableFromSyntax with
     SemigroupoidSyntax with
