@@ -11,7 +11,7 @@ trait HeytingLaws[A] {
   def andAssociative(x: A, y: A, z: A): IsEq[A] =
     A.and(A.and(x, y), z) <=> A.and(x, A.and(y, z))
 
-  def andCommutatiev(x: A, y: A): IsEq[A] =
+  def andCommutative(x: A, y: A): IsEq[A] =
     A.and(x, y) <=> A.and(y, x)
 
   def andIdentity(x: A): IsEq[A] =
@@ -20,7 +20,7 @@ trait HeytingLaws[A] {
   def orAssociative(x: A, y: A, z: A): IsEq[A] =
     A.or(A.or(x, y), z) <=> A.or(x, A.or(y, z))
 
-  def orCommutatiev(x: A, y: A): IsEq[A] =
+  def orCommutative(x: A, y: A): IsEq[A] =
     A.or(x, y) <=> A.or(y, x)
 
   def orIdentity(x: A): IsEq[A] =
